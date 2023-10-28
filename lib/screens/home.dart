@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
         Theme.of(context).colorScheme.onSecondaryContainer;
     Theme.of(context).colorScheme.onSecondaryContainer;
     return Scaffold(
+        backgroundColor: background,
         appBar: AppBar(
           backgroundColor: background,
           foregroundColor: primary,
@@ -31,15 +32,22 @@ class Home extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: TextField(
+                    style: TextStyle(color: secondaryContainerText),
                     decoration: InputDecoration(
+                      focusColor: secondary,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: background)),
+                      filled: true,
+                      fillColor: secondaryContainer,
                       border: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: primary),
                       ),
                       prefixIcon: Icon(
                         Icons.search,
-                        color: primary,
+                        color: secondary,
                       ),
                       hintText: "type to search...",
+                      hintStyle: TextStyle(color: secondaryContainerText),
                     ),
                   ),
                 ))
