@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
     Color secondaryContainer = Theme.of(context).colorScheme.secondaryContainer;
     Color secondaryContainerText =
         Theme.of(context).colorScheme.onSecondaryContainer;
+    Theme.of(context).colorScheme.onSecondaryContainer;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: background,
