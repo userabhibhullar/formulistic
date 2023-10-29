@@ -15,7 +15,6 @@ class Home extends StatelessWidget {
     return Scaffold(
         backgroundColor: background,
         appBar: AppBar(
-          backgroundColor: background,
           foregroundColor: primary,
           title: const Text(
             "FORMULISTIC",
@@ -42,7 +41,7 @@ class Home extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: primary),
                       ),
-                      prefixIcon: Icon(
+                      suffixIcon: Icon(
                         Icons.search,
                         color: secondary,
                       ),
