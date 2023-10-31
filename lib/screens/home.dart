@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
             (snapshot) => snapshot.docs.forEach(
               (documents) {
                 print(documents.reference);
-                topics.add(documents.reference.id.toUpperCase());
+                topics.add(documents.reference.id);
                 displayTopics = topics;
               },
             ),
