@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:formulistic/screens/subcat.dart';
 import 'package:formulistic/utils/color.dart';
 
 class TopicWidget extends StatelessWidget {
@@ -9,10 +8,6 @@ class TopicWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Subcat(title: text)))
-      },
       child: Container(
         decoration: BoxDecoration(
             color: AppColor.secondary, borderRadius: BorderRadius.circular(7)),
