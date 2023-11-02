@@ -1,6 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:formulistic/controller/content_controller.dart';
+import 'package:formulistic/models/content_model.dart';
 import 'package:formulistic/utils/color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Content extends StatefulWidget {
   final String documentId;
@@ -11,14 +13,19 @@ class Content extends StatefulWidget {
 }
 
 class _ContentState extends State<Content> {
-  CollectionReference topics = FirebaseFirestore.instance.collection('topics');
-  Map<String, dynamic> content = {};
+  late ContentModel content;
 
   Future fetchData() async {
-    await topics.doc(widget.documentId).get().then((data) {
-      content = data.data() as Map<String, dynamic>;
-      print(content['description']);
+    await ContentController().fetchData(widget.documentId).then((value) {
+      content = value;
     });
+  }
+
+  _launchUrl() async {
+    Uri uri = Uri.parse(content.source!);
+    if (!await launchUrl(uri)) {
+      throw Exception("failed to open browser");
+    }
   }
 
   @override
@@ -41,8 +48,7 @@ class _ContentState extends State<Content> {
           future: fetchData(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              print("error${snapshot.error}");
-              return const Text("error");
+              return const Center(child: Text("Error fetching data..."));
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -62,18 +68,47 @@ class _ContentState extends State<Content> {
   }
 
   Widget _buildContent() {
-    return Container(
-      child: Column(children: [
+    return SingleChildScrollView(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Image.network(
+          height: 200,
+          content.downloadURL!,
+          filterQuality: FilterQuality.high,
+          fit: BoxFit.fill,
+        ),
+        const SizedBox(
+          height: 14.0,
+        ),
         Padding(
-          padding: const EdgeInsets.only(top: 14.0, left: 10),
+          padding: const EdgeInsets.only(left: 18.0),
           child: Text(
-            content['title'].toString().toUpperCase(),
-            style: TextStyle(
-                fontSize: 32,
-                color: AppColor.primary,
-                fontWeight: FontWeight.w700),
+            "Define: \"${content.define!}\"",
+            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
         ),
+        const SizedBox(
+          height: 14.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 18.0),
+          child: Text(
+            content.description!,
+            style: TextStyle(color: AppColor.secondaryContainer),
+          ),
+        ),
+        const SizedBox(
+          height: 6.0,
+        ),
+        GestureDetector(
+          onTap: () => _launchUrl(),
+          child: Center(
+            child: Text(
+              "Read More...",
+              style: TextStyle(
+                  color: AppColor.secondary, fontWeight: FontWeight.w700),
+            ),
+          ),
+        )
       ]),
     );
   }

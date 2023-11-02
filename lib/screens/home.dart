@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formulistic/components/searchbar.dart';
-import 'package:formulistic/components/topicCard.dart';
+import 'package:formulistic/components/topic_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:formulistic/utils/color.dart';
 
@@ -21,7 +21,6 @@ class _HomeState extends State<Home> {
       await FirebaseFirestore.instance.collection('topics').get().then(
             (snapshot) => snapshot.docs.forEach(
               (documents) {
-                print(documents.reference);
                 topics.add(documents.reference.id);
                 displayTopics = topics;
               },
@@ -70,7 +69,7 @@ class _HomeState extends State<Home> {
           // Space
           const SizedBox(height: 12),
           Expanded(
-            child: Container(
+            child: SizedBox(
               width: 360,
               child: FutureBuilder(
                 future: fetchTopics(),
@@ -84,7 +83,7 @@ class _HomeState extends State<Home> {
                   itemCount: displayTopics.length,
                   itemBuilder: (context, index) {
                     return TopicWidget(
-                      text: displayTopics[index],
+                      documentId: displayTopics[index],
                     );
                   },
                 ),
