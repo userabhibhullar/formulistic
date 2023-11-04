@@ -19,12 +19,14 @@ class TopicWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppColor.secondary, borderRadius: BorderRadius.circular(7)),
         child: Center(
-          child: Text(
-            documentId.toUpperCase(),
-            style: TextStyle(
-                color: AppColor.primary,
-                fontSize: 24,
-                fontWeight: FontWeight.w700),
+          child: Center(
+            child: Text(
+              documentId.toUpperCase(),
+              style: TextStyle(
+                  color: AppColor.primary,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       ),

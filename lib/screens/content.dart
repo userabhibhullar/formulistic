@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formulistic/components/app_bar_widget.dart';
 import 'package:formulistic/controller/content_controller.dart';
 import 'package:formulistic/models/content_model.dart';
 import 'package:formulistic/utils/color.dart';
@@ -32,18 +33,8 @@ class _ContentState extends State<Content> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColor.background,
-        appBar: AppBar(
-          backgroundColor: AppColor.background,
-          title: Text(
-            widget.documentId.toUpperCase(),
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          shape: Border(
-            bottom: BorderSide(color: AppColor.primary, width: 2),
-          ),
-        ),
+        appBar: AppBarWidget(
+            appbar: AppBar(), text: widget.documentId.toUpperCase()),
         body: FutureBuilder(
           future: fetchData(),
           builder: (context, snapshot) {
