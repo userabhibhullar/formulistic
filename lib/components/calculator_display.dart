@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/color.dart';
 
 class CalculatorDisplay extends StatelessWidget {
@@ -23,19 +22,23 @@ class CalculatorDisplay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 30.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    expression,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: AppColor.secondaryContainerText,
-                      fontWeight: FontWeight.w700,
+              padding: const EdgeInsets.only(left: 6.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      expression,
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: AppColor.secondaryContainerText,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Container(
@@ -43,19 +46,22 @@ class CalculatorDisplay extends StatelessWidget {
               color: AppColor.secondaryContainerText,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    result,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: AppColor.secondaryContainerText,
-                      fontWeight: FontWeight.w700,
+              padding: const EdgeInsets.only(left: 6.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      result,
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: AppColor.secondaryContainerText,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

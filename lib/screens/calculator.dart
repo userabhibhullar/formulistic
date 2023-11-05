@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:formulistic/components/keyboard.dart';
 import 'package:formulistic/utils/constants.dart';
@@ -39,7 +37,6 @@ class _CalculatorState extends State<Calculator> {
         expression = expression.replaceAll(COS_SIGN, 'cos');
         expression = expression.replaceAll(TAN_SIGN, 'tan');
         expression = expression.replaceAll(SQ_SIGN, 'sqrt');
-        print(expression);
         try {
           Parser p = Parser();
           Expression exp = p.parse(expression);
@@ -52,19 +49,21 @@ class _CalculatorState extends State<Calculator> {
         if (equation == "0") {
           equation = text;
         } else {
-          equation = equation + text;
+          if (text == PIE_SIGN) {
+            if (NUMBERS.contains(equation.substring(equation.length - 1))) {
+              equation = "$equation*$text";
+            } else {
+              equation = equation + text;
+            }
+          } else {
+            if (equation.substring(equation.length - 1) == PIE_SIGN) {
+              equation = "$equation*$text";
+            } else {
+              equation = equation + text;
+            }
+          }
         }
       }
-    });
-  }
-
-  _getResult() {
-    Parser p = Parser();
-    Expression exp = p.parse(equation);
-    ContextModel cm = ContextModel();
-    double eval = exp.evaluate(EvaluationType.REAL, cm);
-    setState(() {
-      result = "Ans=${eval.toString()}";
     });
   }
 
